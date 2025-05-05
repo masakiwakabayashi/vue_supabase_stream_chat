@@ -5,11 +5,12 @@ export async function savePost(text: string): Promise<void> {
 
   console.log(text);
 
-  const response = await fetch('/functions/v1/save-post', {
+  // TODO: これが404のエラーになっている
+  const response = await fetch('http://localhost:54321/functions/v1/save-post', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_KEY}`,
     },
     body: JSON.stringify({
       content: text,
@@ -17,14 +18,19 @@ export async function savePost(text: string): Promise<void> {
     }),
   });
 
-  // TODO: ここでエラーが出ている
-  const json = await response.json();
+  // Edge FunctionのレスポンスがJSONでない場合に備えてガード
+  let json: any = null;
+  const contentType = response.headers.get('content-type');
+  if (contentType && contentType.includes('application/json')) {
+    json = await response.json();
+  }
 
   console.log(response);
 
   if (!response.ok) {
-    console.error('Edge Function Error:', json.error);
-    throw new Error(json.error || '保存に失敗しました');
+    const errorMsg = json && json.error ? json.error : '保存に失敗しました';
+    console.error('Edge Function Error:', errorMsg);
+    throw new Error(errorMsg);
   }
 
   console.log('保存成功:', json);
