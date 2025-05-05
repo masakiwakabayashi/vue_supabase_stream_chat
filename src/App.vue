@@ -17,6 +17,12 @@ import { RouterLink, RouterView } from 'vue-router'
           >
             Save Vector Post
           </RouterLink>
+          <RouterLink
+            to="/chat_bot"
+            class="hover:text-blue-200 transition-colors duration-200"
+          >
+            Chat Bot
+          </RouterLink>
           <!-- <RouterLink
             to="/login"
             class="hover:text-blue-200 transition-colors duration-200"

@@ -16,6 +16,12 @@ const router = createRouter({
       component: () => import('../views/VectorSaveForm.vue'),
       // meta: { requiresAuth: true },
     },
+    {
+      path: '/chat_bot',
+      name: 'ChatBot',
+      component: () => import('../views/ChatBot.vue'),
+      // meta: { requiresAuth: true },
+    },
   ],
 });
 

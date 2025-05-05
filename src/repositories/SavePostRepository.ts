@@ -3,9 +3,6 @@ import { supabase } from "@/lib/supabaseClient";
 export async function savePost(text: string): Promise<void> {
   const embedding = await getEmbedding(text);
 
-  console.log(text);
-
-  // TODO: これが404のエラーになっている
   const response = await fetch('http://localhost:54321/functions/v1/save-post', {
     method: 'POST',
     headers: {
@@ -24,8 +21,6 @@ export async function savePost(text: string): Promise<void> {
   if (contentType && contentType.includes('application/json')) {
     json = await response.json();
   }
-
-  console.log(response);
 
   if (!response.ok) {
     const errorMsg = json && json.error ? json.error : '保存に失敗しました';
