@@ -1,4 +1,4 @@
-create extension if not exists "vector" with schema "public" version '0.8.0';
+create extension if not exists vector;
 
 create table "public"."posts" (
     "id" uuid not null default gen_random_uuid(),

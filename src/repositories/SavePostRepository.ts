@@ -1,19 +1,33 @@
-// repositories/documentRepository.ts
 import { supabase } from "@/lib/supabaseClient";
 
 export async function savePost(text: string): Promise<void> {
   const embedding = await getEmbedding(text);
 
-  const { data, error } = await supabase
-    .from('posts')
-    .insert({
+  console.log(text);
+
+  const response = await fetch('/functions/v1/save-post', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+    },
+    body: JSON.stringify({
       content: text,
-      embedding,
-    });
+      embedding: embedding,
+    }),
+  });
 
-  if (error) throw error;
+  // TODO: ここでエラーが出ている
+  const json = await response.json();
 
-  console.log(data);
+  console.log(response);
+
+  if (!response.ok) {
+    console.error('Edge Function Error:', json.error);
+    throw new Error(json.error || '保存に失敗しました');
+  }
+
+  console.log('保存成功:', json);
 }
 
 export async function getEmbedding(text: string): Promise<number[]> {

@@ -8,6 +8,8 @@ const message = ref('');
 const save = async () => {
   if (!text.value.trim()) return;
 
+  console.log(text.value);
+
   try {
     message.value = '保存中...';
     await savePost(text.value);
