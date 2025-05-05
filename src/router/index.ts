@@ -6,8 +6,14 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: () => import('../views/StreamingResponse.vue'),
+      // meta: { requiresAuth: true },
+    },
+    {
+      path: '/save_vector_post',
+      name: 'VectorSaveForm',
+      component: () => import('../views/VectorSaveForm.vue'),
       // meta: { requiresAuth: true },
     },
   ],

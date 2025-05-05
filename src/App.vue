@@ -11,6 +11,12 @@ import { RouterLink, RouterView } from 'vue-router'
       <nav class="text-xl flex justify-between items-center">
         <div class="font-bold text-2xl">My App</div>
         <div class="space-x-4">
+          <RouterLink
+            to="/save_vector_post"
+            class="hover:text-blue-200 transition-colors duration-200"
+          >
+            Save Vector Post
+          </RouterLink>
           <!-- <RouterLink
             to="/login"
             class="hover:text-blue-200 transition-colors duration-200"
