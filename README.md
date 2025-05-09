@@ -31,9 +31,8 @@ yarn supabase status
 ### Create Migration
 
 ```sh
-yarn supabase db diff --use-migra -f {migration_name}
+yarn supabase db diff -f {migration_name}
 ```
-
 
 ### Edge Functions
 
