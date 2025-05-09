@@ -34,6 +34,12 @@ yarn supabase status
 yarn supabase db diff -f {migration_name}
 ```
 
+### Create Seeder
+
+```sh
+yarn supabase db dump --local --data-only -f dump.sql
+```
+
 ### Edge Functions
 
 ```sh
