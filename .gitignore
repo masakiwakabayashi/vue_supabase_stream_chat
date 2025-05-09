@@ -15,6 +15,7 @@ coverage
 *.local
 .env
 dump.sql
+chatbot.txt
 
 /cypress/videos/
 /cypress/screenshots/
