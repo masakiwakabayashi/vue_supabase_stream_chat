@@ -9,7 +9,7 @@ export async function getAnswerFromQuestion(question: string): Promise<string> {
 }
 
 async function searchSimilarContent(embedding: number[]) {
-  const { data, error } = await supabase.rpc('match_documents', {
+  const { data, error } = await supabase.rpc('search_similar_posts', {
     query_embedding: embedding,
     match_threshold: 0.75,
     match_count: 5

@@ -16,14 +16,14 @@
 -->
 <script setup>
 import { ref } from 'vue'
-// import { getAnswerFromQuestion } from '@/repositories/chatRepository'
+import { getAnswerFromQuestion } from '@/repositories/ChatBotRepository'
 
 const userInput = ref('')
 const answer = ref('')
 
 const handleSubmit = async () => {
   answer.value = '検索中...'
-  // answer.value = await getAnswerFromQuestion(userInput.value)
+  answer.value = await getAnswerFromQuestion(userInput.value)
 }
 </script>
 
@@ -31,7 +31,6 @@ const handleSubmit = async () => {
   <div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md space-y-4">
     <input
       v-model="userInput"
-      @keyup.enter="handleSubmit"
       placeholder="質問を入力"
       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
