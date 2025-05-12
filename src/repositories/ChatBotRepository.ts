@@ -1,5 +1,5 @@
-import { supabase } from '@/lib/supabaseClient'
 import { getEmbedding } from "@/utils/getEmbedding"
+import { supabase } from "@/lib/supabaseClient"
 
 export async function getAnswerFromQuestion(question: string): Promise<string> {
   const embedding = await getEmbedding(question)
@@ -9,14 +9,29 @@ export async function getAnswerFromQuestion(question: string): Promise<string> {
 }
 
 async function searchSimilarContent(embedding: number[]) {
-  const { data, error } = await supabase.rpc('search_similar_posts', {
-    query_embedding: embedding,
-    match_threshold: 0.75,
-    match_count: 5
+  // supabaseKeyを取得
+  // @ts-ignore
+  const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+  const response = await fetch('http://localhost:54321/functions/v1/search-similar-posts', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': supabaseKey,
+      'Authorization': `Bearer ${supabaseKey}`,
+    },
+    body: JSON.stringify({
+      query_embedding: embedding,
+      match_threshold: 0.75,
+      match_count: 5
+    })
   })
 
-  if (error) throw error
-  return data
+  const result = await response.json()
+  if (!response.ok) {
+    throw new Error(result.error || '検索中にエラーが発生しました')
+  }
+
+  return result
 }
 
 function buildPrompt(question: string, similarContents: any[]): string {
