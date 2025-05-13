@@ -18,6 +18,7 @@ async function startChat() {
   ];
 
   try {
+    // コールバック関数で少しづつ渡されるテキストをmessageに追加している
     await fetchChatStream(messages, (text) => {
       message.value += text;
     });
