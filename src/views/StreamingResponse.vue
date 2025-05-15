@@ -5,14 +5,11 @@ import { fetchChatStream } from '@/repositories/ChatRepository';
 const isLoading = ref(false);
 const message = ref('');
 const userInput = ref('');
-const chatMessages = ref(['']);
+const chatMessages = ref([]);
 const userInputs = ref([]);
-const count = ref(0);
 
 async function startChat() {
   if (!userInput.value.trim()) return;
-
-  count.value++;
 
   message.value = '';
   isLoading.value = true;
@@ -22,16 +19,15 @@ async function startChat() {
     { role: 'user', content: userInput.value },
   ];
 
+  let answer = '';
   try {
-    // コールバック関数で少しづつ渡されるテキストをmessageに追加している
+    // コールバック関数で少しづつ渡されるテキストをanswerに追加していく
     await fetchChatStream(messages, (text) => {
-      chatMessages.value[count] += text;
+      answer += text;
       message.value += text;
-      console.log(chatMessages.value);
     });
-    // .then(()=>{
-      // count++;
-    // });
+    // streamingが完了したらchatMessagesにpush
+    chatMessages.value.push(answer);
   } catch (e) {
     message.value = 'エラーが発生しました: ' + (e instanceof Error ? e.message : String(e));
   } finally {
@@ -43,12 +39,18 @@ async function startChat() {
 <template>
   <div class="p-4 max-w-xl mx-auto">
     <!-- TODO: ここにユーザーの入力とAIからの回答を交互に表示していく -->
+    <div class="p-4">
+      <ul class="space-y-2">
+        <li v-for="(message, index) in chatMessages" :key="index" class="py-3 rounded">
+          {{ message }}
+        </li>
+      </ul>
+    </div>
 
     <!-- チャット応答表示 -->
     <div class="whitespace-pre-wrap p-4 rounded mt-4 min-h-[100px]">
       {{ message }}
     </div>
-
 
     <!-- 入力エリア -->
     <textarea
