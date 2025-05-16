@@ -10,6 +10,8 @@ const userInputs = ref([]);
 
 async function startChat() {
   if (!userInput.value.trim()) return;
+  // ユーザーの質問を表示するための配列に入れる
+  userInputs.value.push(userInput.value);
 
   message.value = '';
   isLoading.value = true;
@@ -30,6 +32,8 @@ async function startChat() {
     chatMessages.value.push(answer);
     // 回答を入れる変数を初期化
     message.value = '';
+    // ユーザーの入力を初期化
+    userInput.value = '';
   } catch (e) {
     message.value = 'エラーが発生しました: ' + (e instanceof Error ? e.message : String(e));
   } finally {
@@ -40,17 +44,21 @@ async function startChat() {
 
 <template>
   <div class="p-4 max-w-xl mx-auto">
-    <!-- TODO: ここにユーザーの入力とAIからの回答を交互に表示していく -->
     <div class="p-4">
       <ul class="space-y-2">
         <li v-for="(message, index) in chatMessages" :key="index" class="py-3 rounded whitespace-pre-wrap">
-          {{ message }}
+          <div class="mb-4">
+            {{ userInputs[index] }}
+          </div>
+          <div>
+            {{ message }}
+          </div>
         </li>
       </ul>
     </div>
 
     <!-- チャット応答表示 -->
-    <div class="whitespace-pre-wrap rounded min-h-[100px]">
+    <div class="whitespace-pre-wrap rounded">
       {{ message }}
     </div>
 
