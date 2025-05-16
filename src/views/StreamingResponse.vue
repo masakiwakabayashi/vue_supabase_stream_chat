@@ -28,6 +28,8 @@ async function startChat() {
     });
     // streamingが完了したらchatMessagesにpush
     chatMessages.value.push(answer);
+    // 回答を入れる変数を初期化
+    message.value = '';
   } catch (e) {
     message.value = 'エラーが発生しました: ' + (e instanceof Error ? e.message : String(e));
   } finally {
@@ -41,14 +43,14 @@ async function startChat() {
     <!-- TODO: ここにユーザーの入力とAIからの回答を交互に表示していく -->
     <div class="p-4">
       <ul class="space-y-2">
-        <li v-for="(message, index) in chatMessages" :key="index" class="py-3 rounded">
+        <li v-for="(message, index) in chatMessages" :key="index" class="py-3 rounded whitespace-pre-wrap">
           {{ message }}
         </li>
       </ul>
     </div>
 
     <!-- チャット応答表示 -->
-    <div class="whitespace-pre-wrap p-4 rounded mt-4 min-h-[100px]">
+    <div class="whitespace-pre-wrap rounded min-h-[100px]">
       {{ message }}
     </div>
 
