@@ -14,6 +14,9 @@
    ↓
 [6] 回答を表示
 -->
+
+<!-- TODO: ベクトルサーチが上手く機能していないので修正する -->
+
 <script setup>
 import { ref } from 'vue'
 import { getAnswerFromQuestion } from '@/repositories/ChatBotRepository'
