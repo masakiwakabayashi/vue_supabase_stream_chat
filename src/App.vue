@@ -30,6 +30,12 @@ import { RouterLink, RouterView } from 'vue-router'
           >
             Chat Bot
           </RouterLink>
+          <RouterLink
+            to="/image_analyzer"
+            class="hover:text-blue-200 transition-colors duration-200"
+          >
+            Image Analyzer
+          </RouterLink>
           <!-- <RouterLink
             to="/login"
             class="hover:text-blue-200 transition-colors duration-200"

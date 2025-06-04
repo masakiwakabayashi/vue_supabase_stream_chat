@@ -22,6 +22,12 @@ const router = createRouter({
       component: () => import('../views/ChatBot.vue'),
       // meta: { requiresAuth: true },
     },
+    {
+      path: '/image_analyzer',
+      name: 'ImageAnalyzer',
+      component: () => import('../views/ImageAnalyzer.vue'),
+      // meta: { requiresAuth: true },
+    },
   ],
 });
 
