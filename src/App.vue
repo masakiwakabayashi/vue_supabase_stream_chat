@@ -36,6 +36,12 @@ import { RouterLink, RouterView } from 'vue-router'
           >
             Image Analyzer
           </RouterLink>
+          <RouterLink
+            to="/pdf_reader"
+            class="hover:text-blue-200 transition-colors duration-200"
+          >
+            PDF Reader
+          </RouterLink>
           <!-- <RouterLink
             to="/login"
             class="hover:text-blue-200 transition-colors duration-200"

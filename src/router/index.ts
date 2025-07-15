@@ -28,6 +28,12 @@ const router = createRouter({
       component: () => import('../views/ImageAnalyzer.vue'),
       // meta: { requiresAuth: true },
     },
+    {
+      path: '/pdf_reader',
+      name: 'PdfReader',
+      component: () => import('../views/PdfReader.vue'),
+      // meta: { requiresAuth: true },
+    },
   ],
 });
 
