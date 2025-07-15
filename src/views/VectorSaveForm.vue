@@ -20,8 +20,12 @@ const save = async () => {
 </script>
 
 <template>
+  <div>
+    <h1 class="flex items-center justify-center text-4xl font-bold text-gray-800 my-8">
+      <span class="border-b-2 border-blue-600 pb-1 px-2">テキストをベクトルデータとして保存する機能</span>
+    </h1>
+  </div>
   <div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded">
-    <h1 class="text-xl font-bold mb-4">テキストベクトル化ページ</h1>
     <textarea
       v-model="text"
       class="w-full p-3 border rounded mb-4"

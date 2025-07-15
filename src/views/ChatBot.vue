@@ -31,6 +31,11 @@ const handleSubmit = async () => {
 </script>
 
 <template>
+  <div>
+    <h1 class="flex items-center justify-center text-4xl font-bold text-gray-800 my-8">
+      <span class="border-b-2 border-blue-600 pb-1 px-2">保存されているデータを元に回答するチャットボット機能</span>
+    </h1>
+  </div>
   <div class="max-w-xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md space-y-4">
     <input
       v-model="userInput"
